@@ -1,0 +1,31 @@
+﻿@model WC1.Areas.Profile.Models.PredictionViewModel
+
+<div class="panel-heading">
+    <table>
+        <tbody>
+            @*TODO : Correct styling*@
+            <td>Match | </td>
+            <td>| @Model.FixtureDate  |</td>
+            <td> | @Html.ActionLink(string.Format("{0} vs {1}", Model.FirstTeam, Model.SecondTeam), 
+                                    "Details", 
+                                    "Fixture", 
+                                    new {area="", fixtureID = Model.FixtureID}, null)</td>
+            <td>Editable : </td>
+            <td>|| Total Bet placed: @Model.TotalBet</td>
+        </tbody>
+    </table>
+</div>
+
+@foreach (var betItem in Model.BetDetails)
+{
+    if (betItem.BetValue != null)
+    {
+        <div class="panel-body">
+            You predicted for @betItem.BetItem : 
+            <span style="font-size: 14px">
+                @betItem.BetValue
+            </span>
+            Weightage : @betItem.BetWeightage
+        </div>
+    }
+}

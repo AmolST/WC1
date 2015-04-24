@@ -1,0 +1,41 @@
+﻿@model WC1.ViewModels.BettingOptions.ProfileBettingViewModel
+@{
+    ViewBag.Title = "Betting Options";
+}
+
+@helper DecideEditable(bool disabled)
+{
+    if (!disabled)
+    {
+        <span class="glyphicon glyphicon-pencil"></span>
+    }
+}
+
+<div class="panel-heading">
+    <table>
+        <tbody>
+            @*TODO : Correct styling*@
+            <td>Match | </td>
+            <td>| @Model.FixtureDate  |</td>
+            <td> | @Html.ActionLink(string.Format("{0} vs {1}", Model.Teams[0], Model.Teams[1]), 
+                                    "Details", 
+                                    "Fixture", 
+                                    new {area="", fixtureID = Model.FixtureID}, null) || </td>
+            <td>@DecideEditable(Model.Disabled)</td>
+            <td>|| Total Bet placed: @Model.TotalBet</td>
+        </tbody>
+    </table>
+</div>
+
+@using (Html.BeginForm(new {ViewBag.ReturnUrl}))
+{
+    @Html.ValidationSummary(true)
+    <div class="panel panel-group" id="accordion">
+        @foreach (var m in Model.AllViewModel)
+        {
+            @Html.EditorFor(vm => m, m.ViewName)
+        }
+    </div>
+    <input type="submit" class="btn btn-info btn-default" value="Update Bet"/>
+    @Html.HiddenFor(m => m.FixtureID)
+}

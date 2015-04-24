@@ -1,0 +1,12 @@
+﻿@model IEnumerable<WC1.Areas.Profile.Models.PredictionViewModel>
+
+<h1>
+    <small>Welcome</small> @ViewBag.ProfileName <small>!</small>
+</h1>
+
+@{
+    Html.RenderPartial("ProfileSummary");
+}
+<div class="panel panel-default">
+    @Html.DisplayForModel()
+</div>

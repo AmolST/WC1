@@ -1,0 +1,15 @@
+﻿@model IEnumerable<WC1.Models.Team>
+
+@{
+    ViewBag.Title = "Teams";
+}
+
+<h2>@ViewBag.Title</h2>
+<div>
+    <fieldset class="form-group">
+        <legend class="text-primary">Select Team</legend>
+        <div>
+            @Html.DropDownList("teamList", new SelectList(Model,"ID", "TeamName"))
+        </div>
+    </fieldset>
+</div>

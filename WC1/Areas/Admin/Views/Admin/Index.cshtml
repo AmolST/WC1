@@ -1,0 +1,12 @@
+﻿@model dynamic
+
+@{
+    ViewBag.Title = "title";
+}
+<header class="page-header">
+        <ul class="nav nav-pills">
+            <li role="presentation">@Html.ActionLink("Result","Index", "Result", new {area ="Admin"}, null)</li>
+            <li role="presentation">@Html.ActionLink("Bet","Index", "BetCondition", new {area="Admin"}, null)</li>
+            <li role="presentation">@Html.ActionLink("Rules","Index", "Rules", new {area="Admin"}, null)</li>
+        </ul>
+    </header>

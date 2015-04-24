@@ -1,0 +1,38 @@
+﻿@model WC1.Areas.Admin.Models.FixtureResultViewModel
+@{
+    ViewBag.Title = "Manage Results";
+}
+
+<title> @ViewBag.Title</title>
+
+@using (Html.BeginForm(new {ViewBag.ReturnUrl}))
+{
+    @Html.ValidationSummary(true)
+
+    <div>
+        @Html.DropDownListFor(m => m.FixtureID, new SelectList(Model.Fixtures, "FixtureID", "FixtureName"), "Select Fixture")
+        <div id="viewport"></div>
+    </div>
+    @*<input type="submit" class="btn btn-info btn-default" value="Add Result"/>*@
+}
+<script type="text/javascript">
+    $(document).ready(function () {
+        $("#FixtureID").change(function () {
+            if ($("#FixtureID").val() != "Select") {
+                var bettingVMOption = {};
+                bettingVMOption.url = "/Result/ShowBettingDetails";
+                bettingVMOption.type = "POST";
+                bettingVMOption.data = { fixtureID: $("#FixtureID").val(), profileID : 1 };
+                bettingVMOption.success = function (data) {
+                    $('#viewport').html(data);
+                    $('#viewport').fadeIn('fast');
+                };
+                bettingVMOption.error = function () { alert("Error in Getting View Model!!"); };
+                $.ajax(bettingVMOption);
+            }
+            else {
+                $("#viewport").prop("disabled", true);
+            }
+        });
+    });
+</script>

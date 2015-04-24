@@ -1,0 +1,58 @@
+﻿@using WC1.ViewModels.Fixture
+@model IEnumerable<FixtureViewModel>
+@{
+    ViewBag.Title = "Matches";
+}
+
+@helper ShowBetColumn(FixtureViewModel fixture)
+{
+    if (fixture.Result == "Yet to Play")
+    {
+        <span>
+            @Html.ActionLink("Details", "Details", new {fixtureID = fixture.FixtureID}) |
+            @Html.ActionLink("Place Bet","Index","Betting", new {fixtureID = fixture.FixtureID}, null) 
+            
+        </span>
+    }
+    else
+    {
+        @Html.ActionLink("Details", "Details", new {fixtureID = fixture.FixtureID})
+    }
+}
+
+<h2>Fixtures</h2>
+<table class="table table-striped">
+    <thead>
+        <th>
+            Date
+        </th>
+        <th>
+            Team
+        </th>
+        <th>
+            Team
+        </th>
+        <th>
+            Venue
+        </th>
+        <th>
+            Result
+        </th>
+        <th>
+            Bet
+        </th>
+    </thead>
+    <tbody>
+        @foreach (var fixture in Model)
+        {
+            <tr>
+                <td>@fixture.FixtureDate</td>
+                <td>@fixture.FirstTeam</td>
+                <td>@fixture.SecondTeam</td>
+                <td>@fixture.Venue</td>
+                <td>@fixture.Result</td>
+                <td>@ShowBetColumn(fixture)</td>
+            </tr>
+        }
+    </tbody>
+</table>

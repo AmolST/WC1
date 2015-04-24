@@ -1,0 +1,17 @@
+﻿@model IEnumerable<WC1.Models.Rule>
+@{
+    ViewBag.Title = "Rules";
+}
+
+<h2>Game Rules</h2>
+<dl>
+    <ol>
+    @foreach (var rule in Model)
+    {
+        <li>
+            <dt>@rule.Title</dt>
+            <dd>@rule.Description</dd>
+        </li>
+    }
+    </ol>
+</dl>

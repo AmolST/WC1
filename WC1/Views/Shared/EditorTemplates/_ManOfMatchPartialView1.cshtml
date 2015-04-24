@@ -1,0 +1,42 @@
+﻿@model WC1.ViewModels.BettingOptions.MoMViewModel
+<div class="panel panel-warning">
+    <div class="panel panel-heading">
+        <span class="" data-toggle="collapse" data-parent="#accordion" href="CollapseTwo">@Model.Question </span> 
+        <span class="pull-right">
+            Weightage  <span class="badge"> @Model.BetWeightage</span>
+        </span>
+    </div>
+    <div id="CollapseTwo" class="panel-collapse collapse in">
+        <div class="panel-body">
+             @{
+                 var htmlAttributes = new Dictionary<string, object>
+                     {
+                         {"class", "btn btn-default dropdown-toggle"}
+                     };
+                 var disableAttributes = new Dictionary<string, object>
+                     {
+                         {"class", "btn btn-default dropdown-toggle"},
+                         {"disabled", "disabled"}
+                     };
+             }
+             
+            @{
+                if (Model.Disabled)
+                {
+                    @Html.DropDownListFor(m => m.Prediction,
+                                          new SelectList(Model.Players, "ID", "Name", Model.BetValueID), "Select Player",
+                                          disableAttributes)
+                }
+                else
+                {
+                    @Html.DropDownListFor(m => m.Prediction,
+                                          new SelectList(Model.Players, "ID", "Name", Model.BetValueID), "Select Player",
+                                          htmlAttributes)
+
+                }
+            }
+  
+        </div>
+        </div>
+</div>
+@Html.HiddenFor(m=>m.BetID)

@@ -1,0 +1,25 @@
+﻿@using WC1.Helpers
+@model WC1.Models.ScoreFeedModel
+@{
+    ViewBag.Title = "Updates";
+}
+
+<h2>@ViewBag.Title</h2>
+
+<table class="table table-striped">
+    <thead>
+        <th>Title</th>
+        <th>Desciption</th>
+    </thead>
+    <tbody>
+      
+        @foreach (var feed in Model.Feeds)
+        {
+            <tr>
+                <td>@Html.Hyperlink(feed.Link, feed.Title)</td>
+                <td>@feed.Description</td>
+            </tr>
+        }
+    </tbody>
+</table>
+

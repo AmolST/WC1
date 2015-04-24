@@ -1,0 +1,51 @@
+﻿@model WC1.ViewModels.BettingOptions.TossViewModel
+<div class="panel panel-warning">
+    <div class="panel panel-heading">
+        <span class="">@Model.Question </span>
+        <span class="pull-right">
+            Weightage <span class="badge"> @Model.BetWeightage</span>
+        </span>
+    </div>
+    <div id="collapseOne" class="panel-collapse collapse in">
+        <div class="panel-body">
+            
+            @{
+                var chkedAttributes = new Dictionary<string, object>
+                    {
+                        {"checked", "checked"}
+                    };
+                var disableAttributes = new Dictionary<string, object>
+                    {
+                        {"disabled", "disabled"}
+                    };
+                var chkedDisableAttributes = new Dictionary<string, object>
+                    {
+                        {"checked", "checked"},
+                        {"disabled", "disabled"}
+                    };
+            }
+
+            @foreach (var team in Model.Teams)
+            {
+                <span class="col-sm-10">
+                    @if (Model.Disabled)
+                    {
+                        @Html.RadioButtonFor(model => model.Prediction,
+                                             team.Key,
+                                             Model.BetValueID == team.Key ? chkedDisableAttributes : disableAttributes)
+                    }
+                    else
+                    {
+                        @Html.RadioButtonFor(model => model.Prediction,
+                                             team.Key,
+                                             Model.BetValueID == team.Key ? chkedAttributes : null)
+                    }
+                    @team.Value
+                </span>
+            }
+            
+        </div> 
+    </div>
+</div>
+@Html.HiddenFor(m => m.BetID)
+
